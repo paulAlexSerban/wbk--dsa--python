@@ -1,4 +1,4 @@
-from typing import List  # 1
+from typing import List
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
