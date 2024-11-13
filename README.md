@@ -1,4 +1,7 @@
 # Python - Algorithms and Data Structures
+## Pre-requisites
+- python 3.12.4
+- pip 24.0
 
 ## Coding Style Guide for Python
 https://peps.python.org/pep-0008/
