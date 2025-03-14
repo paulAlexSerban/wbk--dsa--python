@@ -1,4 +1,5 @@
-'''
+from typing import List  # 1
+"""
 You are given an array prices where prices[i] is the price of a given stock on the ith day.
 You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
 Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
@@ -20,9 +21,7 @@ Constraints:
 
 1 <= prices.length <= 105
 0 <= prices[i] <= 104
-'''
 
-'''
 # 1. Initialize min_price to infinity. This will store the lowest price seen so far.
 # 2. Initialize max_profit to 0. This will store the maximum profit found so far.
 # 3. Iterate through each price in the list of prices.
@@ -31,9 +30,8 @@ Constraints:
 # 5.1 If the current price minus the minimum price seen so far is greater than the
 # 5.2 maximum profit found so far, update max_profit to this new profit.
 # 6. Return the maximum profit found.
-'''
+"""
 
-from typing import List  # 1
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         min_price = float('inf') # 1

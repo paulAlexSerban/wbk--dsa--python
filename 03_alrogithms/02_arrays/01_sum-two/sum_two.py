@@ -1,3 +1,4 @@
+from typing import List  # 1
 ###############
 # Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 # You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -35,7 +36,6 @@
 # 7. If the difference is not found, store the current number and its index in the dictionary for future reference
 # 8. Return an empty list if no such pair is found that adds up to the target
 ###############
-from typing import List  # 1
 class Solution:
   def twoSum(self, nums: List[int], target: int) -> List[int]: 
       number_to_index = {} # 2

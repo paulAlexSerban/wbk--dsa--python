@@ -30,3 +30,8 @@ install_venv_as_kernel:
 start_jupyter:
 	@echo "Starting Jupyter Notebook..."
 	@jupyter notebook
+
+lint:
+	@echo "Linting..."
+	@pylint . --rcfile=.pylintrc -r y
+	@echo "Linting done."
