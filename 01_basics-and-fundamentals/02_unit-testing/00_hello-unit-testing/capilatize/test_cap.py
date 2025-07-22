@@ -1,16 +1,13 @@
-import unittest
 from cap import cap_text
 
-class TestCap(unittest.TestCase):
+
+class TestCap:
     def test_one_word(self):
-        text = 'python'
+        text = "python"
         result = cap_text(text)
-        self.assertEqual(result, 'Python')
-    
+        assert result == "Python"
+
     def test_multiple_words(self):
-        text = 'monty python'
+        text = "monty python"
         result = cap_text(text)
-        self.assertEqual(result, 'Monty Python')
-        
-if __name__ == '__main__':
-    unittest.main()
+        assert result == "Monty Python"
