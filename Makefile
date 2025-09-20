@@ -54,3 +54,7 @@ clean_jupyter_notebooks:
 	@find . -name "*.ipynb" -exec nbstripout {} \;
 	du -sh ./* | sort -rh | head -n 5
 	@echo "Jupyter Notebook files cleaned."
+
+test:
+	@echo "Running tests..."
+	@pytest --maxfail=1 --disable-warnings -v
