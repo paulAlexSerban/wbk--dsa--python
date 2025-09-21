@@ -1,23 +1,71 @@
-## Section 2: Choosing Data Structures for Performance
+from collections import deque, defaultdict
+import bisect
 
-Selecting the right data structures is the linchpin of efficient router design. In the context of our Python router, three primary operations drive our choices: maintaining FIFO (First-In, First-Out) order, enabling lightning-fast duplicate detection, and supporting rapid range queries for statistics. Let's break down why each data structure was chosen and how it contributes to the router's speed and reliability.
+class Router(object):
 
-The `deque` from Python’s `collections` module forms the backbone of our packet buffer. Unlike a standard list, a `deque` (double-ended queue) allows for O(1) time complexity for append and pop operations from either end. This is crucial for a router, where packets must be appended as they arrive and the oldest must be evicted or forwarded with minimal delay. Relying on `deque` not only conserves memory but also ensures your router can handle high-throughput scenarios without bottlenecks. Its simplicity and efficiency make it a staple for queue-based systems.
+    def __init__(self, memoryLimit):
+        """
+        :type memoryLimit: int
+        """
+        self.memoryLimit = memoryLimit
+        self.packets = deque()  # FIFO queue of packets: (source, destination, timestamp)
+        self.packet_set = set()  # To check for duplicates: (source, destination, timestamp)
+        # For getCount: destination -> sorted list of timestamps of packets currently in router
+        self.dest_to_timestamps = defaultdict(list)
 
-{/*
-Visual: Diagram showing a deque with packets entering at one end (append) and leaving at the other (popleft), illustrating FIFO behavior.
-*/}
+    def addPacket(self, source, destination, timestamp):
+        """
+        :type source: int
+        :type destination: int
+        :type timestamp: int
+        :rtype: bool
+        """
+        key = (source, destination, timestamp)
+        if key in self.packet_set:
+            return False
 
-To prevent duplicate packets, we utilize a `set` to store the unique key for each packet—a tuple of `(source, destination, timestamp)`. Python sets provide O(1) average-case performance for lookups, insertions, and deletions, making them perfect for fast duplicate checks. This means that as each packet arrives, the router can instantly determine if it’s already in memory, ensuring the integrity of the data stream. The set’s efficiency becomes even more apparent as the number of packets grows, eliminating the need for costly linear scans.
+        # If at capacity, evict oldest
+        if len(self.packets) == self.memoryLimit:
+            old_source, old_dest, old_time = self.packets.popleft()
+            self.packet_set.remove((old_source, old_dest, old_time))
+            # Remove old_time from dest_to_timestamps[old_dest]
+            idx = bisect.bisect_left(self.dest_to_timestamps[old_dest], old_time)
+            if idx < len(self.dest_to_timestamps[old_dest]) and self.dest_to_timestamps[old_dest][idx] == old_time:
+                self.dest_to_timestamps[old_dest].pop(idx)
+            if not self.dest_to_timestamps[old_dest]:
+                del self.dest_to_timestamps[old_dest]
 
-Another performance-critical aspect is efficiently answering range count queries: “How many packets with destination X have timestamps in [Y, Z]?” For this, we use a `defaultdict(list)`, mapping each destination to a sorted list of timestamps. Keeping these lists sorted allows us to leverage the `bisect` module, which implements binary search for fast insertion and querying. Inserting a new packet’s timestamp is O(log n) (using `bisect.insort`), and counting packets in a range is also O(log n) (with `bisect_left` and `bisect_right`). This is especially important for routers handling tens of thousands of packets, as naive approaches would be too slow.
+        self.packets.append((source, destination, timestamp))
+        self.packet_set.add(key)
+        # Insert timestamp in sorted order for the destination
+        bisect.insort(self.dest_to_timestamps[destination], timestamp)
+        return True
 
-{/*
-Visual: Show a defaultdict mapping destinations to sorted lists, with arrows from each destination to a line of timestamps, and highlight binary search for fast range queries.
-*/}
+    def forwardPacket(self):
+        """
+        :rtype: List[int]
+        """
+        if not self.packets:
+            return []
+        source, destination, timestamp = self.packets.popleft()
+        self.packet_set.remove((source, destination, timestamp))
+        # Remove timestamp from dest_to_timestamps[destination]
+        idx = bisect.bisect_left(self.dest_to_timestamps[destination], timestamp)
+        if idx < len(self.dest_to_timestamps[destination]) and self.dest_to_timestamps[destination][idx] == timestamp:
+            self.dest_to_timestamps[destination].pop(idx)
+        if not self.dest_to_timestamps[destination]:
+            del self.dest_to_timestamps[destination]
+        return [source, destination, timestamp]
 
-This thoughtful combination of data structures—`deque` for FIFO, `set` for uniqueness, and `defaultdict` plus `bisect` for sorted range queries—achieves a harmonious balance. The router can scale to large memory limits, respond in real-time, and handle complex queries without sacrificing maintainability or readability. When designing such systems, always analyze your use cases and select data structures that minimize the time complexity for your critical operations. This not only improves performance but also makes your codebase easier to reason about and extend in the future.
-
-{/*
-Visual: A flowchart summarizing the data path—packet arrival triggers set check, then deque append, then defaultdict/bisect insert; queries use bisect for range lookups.
-*/}
+    def getCount(self, destination, startTime, endTime):
+        """
+        :type destination: int
+        :type startTime: int
+        :type endTime: int
+        :rtype: int
+        """
+        # get all timestamps for this destination
+        timestamps = self.dest_to_timestamps.get(destination, [])
+        left = bisect.bisect_left(timestamps, startTime)
+        right = bisect.bisect_right(timestamps, endTime)
+        return right - left
