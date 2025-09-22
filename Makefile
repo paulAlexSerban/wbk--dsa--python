@@ -15,7 +15,7 @@ install_deps:
 	@echo "Installing dependencies..."
 	@pip install -r requirements.txt
 	@echo "Dependencies installed."
-	@make freeze_deps
+	@make freeze_depmake test
 
 install_ci_deps:
 	@echo "Installing dependencies..."
