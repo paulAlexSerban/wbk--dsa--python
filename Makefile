@@ -6,22 +6,11 @@ activate_venv:
 	@echo "Activating virtual environment..."
 	. .venv/bin/activate
 
-freeze_deps:
-	@echo "Freezing dependencies..."
-	@pip freeze > requirements.lock.txt
-	@echo "Dependencies frozen."
-
 install_deps:
 	@echo "Installing dependencies..."
 	@pip install -r requirements.txt
 	@echo "Dependencies installed."
 	@make freeze_depmake test
-
-install_ci_deps:
-	@echo "Installing dependencies..."
-	@pip install -r requirements.lock.txt
-	@python machine-learning/nltk_deps.py 
-	@echo "Dependencies installed."
 
 install_jupiter_n_ipykernel:
 	@echo "Installing Jupyter Notebook..."

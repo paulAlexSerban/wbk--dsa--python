@@ -1,11 +1,17 @@
-# Python - Algorithms and Data Structures
-## Pre-requisites
-- python 3.12.4
-- pip 24.0
+# Python Data Structures and Algorithms Workbook
 
-## Coding Style Guide for Python
-https://peps.python.org/pep-0008/
+Personal Data Structures and Algorithms (DSA) workbook. This repository serves as a practical playground where I implement foundational computer science concepts, solve algorithmic challenges, and master core interview patterns using Python.
 
-## Resources
-- [Github Repo - Teclado Code - Python Refresher](https://github.com/tecladocode/python-refresher)
-- [Course eBook - REST APIs with Flask and Python](https://rest-apis-flask.teclado.com/docs/course_intro/)
+The codebase tracks my journey through various online courses, competitive programming platforms, and targeted practice roadmaps.
+
+## Sources & Platforms
+
+Exercises implemented in this repository are sourced from:
+
+- **freeCodeCamp**
+- **HackerRank**
+- **LeetCode**
+- **CodeCademy**
+- **Codewars**
+- **Udemy Courses**
+- **Exercism**
