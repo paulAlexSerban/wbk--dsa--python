@@ -10,7 +10,6 @@ install_deps:
 	@echo "Installing dependencies..."
 	@pip install -r requirements.txt
 	@echo "Dependencies installed."
-	@make freeze_depmake test
 
 install_jupiter_n_ipykernel:
 	@echo "Installing Jupyter Notebook..."
