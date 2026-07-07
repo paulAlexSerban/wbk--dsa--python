@@ -1,6 +1,6 @@
 # Spaced Repetition: from Zero to Expert in Python
 
-## 1. What & Why: Sthe Science
+## What & Why: Sthe Science
 Spaced repetition is a learning techinqique that schedules reviews of material at increasing intervals, exploiting two cognitive phenomena:
 
 - phenomenon: forgetting curve
@@ -25,3 +25,30 @@ Use cases:
 - vocabulary in LLM fine-tuning pipelines
 - personal knowledge manageemnt (Obsidian + plugins)
 - code review flashcards (API signatures, regex pattern, SQL idioms)
+
+## SM-2: The Original Algorithm
+SM2- was designed by piots Wozniak in 1987 - it remains the foundation of most SRS tools
+
+Core concepts
+
+| variable | name              | meaning                              |
+| -------- | ----------------- | ------------------------------------ |
+| `n`      | repetition number | how many times reviewed successfully |
+| `EF`     | easiness factor   | how easy the card is (starts at 2.5) |
+| `I`      | interval          | days until next review               |
+| `q`      | quality           | user's self-rating: 0-5              |
+
+The SM-2 Formulas:
+
+```
+# interval formulas
+if n == 0: I = 1
+if n == 1: I = 6
+if n >= 2: I = round(I_prev * EF)
+
+# easiness factor update (after each review):
+EF_new = EF + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02))
+EF_new = max(EF_new, 1.3) # floor: 1.3
+
+# if q < 3 (failed recall): reset n to 0, keep EF, restart intervals
+```
