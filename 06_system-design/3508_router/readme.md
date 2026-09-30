@@ -142,7 +142,7 @@ By understanding these patterns, you can adapt solutions to a wide variety of so
 
 ### 1. **Network Hardware Routers & Switches (Packet Buffers)**
 - **Scenario:**  
-  Commercial routers and switches use hardware buffers (typically FIFO queues) to temporarily store incoming packets. Buffers have a strict memory limit (dictated by chip cost, energy, and latency). When the buffer is full, the oldest packets are dropped (tail drop) or overwritten—mirroring the memoryLimit/ejection logic in your Router.
+  Commercial routers and switches use hardware buffers (typically FIFO queues) to temporarily store incoming packets. Buffers have a strict memory limit (dictated by chip cost, energy, and latency). When the buffer is full, the oldest packets are dropped (tail drop) or overwritten-mirroring the memoryLimit/ejection logic in your Router.
 - **Duplicate Detection:**  
   While hardware rarely checks for exact duplicates (due to speed constraints), some high-level network appliances or custom software routers may filter out retransmits or duplicate frames using hash tables, similar to your `set` for packet keys.
 - **Trade-off:**  
@@ -153,28 +153,28 @@ By understanding these patterns, you can adapt solutions to a wide variety of so
 - **Scenario:**  
   Distributed message brokers maintain a bounded queue (topic partition, buffer) per consumer or topic. When the queue is full, the oldest messages are dropped or moved to slower storage, matching your FIFO packet eviction.
 - **Duplicate Detection:**  
-  Some systems track unique message IDs to prevent re-processing, using sets or indexes—directly analogous to your deduplication logic.
+  Some systems track unique message IDs to prevent re-processing, using sets or indexes-directly analogous to your deduplication logic.
 - **Trade-off:**  
   - **Coding Problem:** Memory is fixed; eviction is exact and immediate.
   - **Real World:** Many brokers allow for tuning (e.g., time-based retention, disk spill, dead-letter queues) and must handle persistence, replication, and crash recovery, adding complexity.
 
 ### 3. **API Rate Limiting and Quota Enforcement**
 - **Scenario:**  
-  API gateways often store a rolling window of requests per user to enforce quotas or rate limits. They keep only the most recent N requests, evicting old ones—using a deque or FIFO structure.
+  API gateways often store a rolling window of requests per user to enforce quotas or rate limits. They keep only the most recent N requests, evicting old ones-using a deque or FIFO structure.
 - **Trade-off:**  
   - **Coding Problem:** All operations are in-memory and fast.
   - **Real World:** Systems often shard or hash across distributed caches (Redis, Memcached), may use approximate algorithms (leaky bucket, sliding window logs), and must handle distributed consistency.
 
 ### 4. **Database Write-Ahead Logs & Caches**
 - **Scenario:**  
-  In-memory caches (like LRU caches) and write-ahead logs (WALs) maintain a capped buffer of recent entries. When the buffer is full, they evict the oldest data, similar to your router. Deduplication can be crucial in caches (to avoid stale data)—done with sets or hash tables.
+  In-memory caches (like LRU caches) and write-ahead logs (WALs) maintain a capped buffer of recent entries. When the buffer is full, they evict the oldest data, similar to your router. Deduplication can be crucial in caches (to avoid stale data)-done with sets or hash tables.
 - **Trade-off:**  
   - **Coding Problem:** Buffer fits entirely in memory.
   - **Real World:** Large systems spill to disk, use checkpoints, and may deal with partial failures and recovery.
 
 ### 5. **Event Stream Processors (Apache Flink, Storm, etc.)**
 - **Scenario:**  
-  Streaming engines must process and sometimes store a window of recent events for stateful computations or windowed joins. They use memory-capped buffers, deduplicate on event keys/timestamps, and support efficient range queries (for analytics)—just like your getCount.
+  Streaming engines must process and sometimes store a window of recent events for stateful computations or windowed joins. They use memory-capped buffers, deduplicate on event keys/timestamps, and support efficient range queries (for analytics)-just like your getCount.
 - **Trade-off:**  
   - **Coding Problem:** Single-threaded, all in-process.
   - **Real World:** Systems must scale horizontally, checkpoint state, handle backpressure, and tolerate node failures.
@@ -205,7 +205,7 @@ By understanding these patterns, you can adapt solutions to a wide variety of so
 
 ## Conclusion
 
-The Router class is a microcosm of patterns that are deeply embedded in real-world engineering: bounded buffers, deduplication, FIFO eviction, and efficient querying. Whether you’re designing a hardware router, a distributed message queue, or a streaming analytics engine, the same core ideas apply—though at scale, you must adapt data structures, add fault tolerance, and optimize for distributed environments. Understanding these trade-offs prepares you for the leap from coding interviews to robust, production engineering.
+The Router class is a microcosm of patterns that are deeply embedded in real-world engineering: bounded buffers, deduplication, FIFO eviction, and efficient querying. Whether you’re designing a hardware router, a distributed message queue, or a streaming analytics engine, the same core ideas apply-though at scale, you must adapt data structures, add fault tolerance, and optimize for distributed environments. Understanding these trade-offs prepares you for the leap from coding interviews to robust, production engineering.
 
 
 **Visuals that could help:**  
@@ -299,12 +299,12 @@ Imagine a limited-size conveyor belt (the router) in a warehouse. Each box (pack
 
 ## How Mastering the "Router" Algorithm Accelerates Your Software Engineering Career
 
-Designing and implementing a memory-efficient, duplicate-free, and high-throughput router, like the one above, goes far beyond passing an interview. Mastery of such algorithms maps directly to a wide spectrum of skills crucial at every stage of a software engineering career—from daily development to system architecture and technical leadership.
+Designing and implementing a memory-efficient, duplicate-free, and high-throughput router, like the one above, goes far beyond passing an interview. Mastery of such algorithms maps directly to a wide spectrum of skills crucial at every stage of a software engineering career-from daily development to system architecture and technical leadership.
 
 ### 1. Daily Engineering Work: Building Reliable, Efficient Systems
 
 - **Data Structure Fluency:**  
-  Implementing this router requires a solid grasp of Python’s `deque`, `set`, `defaultdict`, and `bisect` modules. In day-to-day work, this translates into the ability to select the best data structure for each job—leading to more maintainable, performant code whether you’re handling caching, analytics, queues, or resource management.
+  Implementing this router requires a solid grasp of Python’s `deque`, `set`, `defaultdict`, and `bisect` modules. In day-to-day work, this translates into the ability to select the best data structure for each job-leading to more maintainable, performant code whether you’re handling caching, analytics, queues, or resource management.
 
 - **Edge Case and Error Handling:**  
   The router solution has to handle full buffers, duplicate packets, and empty states gracefully. Developing this mindset helps you build robust components that don’t fail under real-world workloads, a hallmark of a dependable engineer.
@@ -312,7 +312,7 @@ Designing and implementing a memory-efficient, duplicate-free, and high-throughp
 ### 2. System Design & Architecture: Thinking at Scale
 
 - **Resource Constraints and Scalability:**  
-  The router’s memory limit mimics real-world constraints—RAM caps, disk quotas, or throughput ceilings. Learning to design for these boundaries is essential when architecting microservices, distributed systems, or cloud-native platforms.
+  The router’s memory limit mimics real-world constraints-RAM caps, disk quotas, or throughput ceilings. Learning to design for these boundaries is essential when architecting microservices, distributed systems, or cloud-native platforms.
 
 - **Algorithmic Thinking:**  
   The use of efficient insertions, lookups, evictions, and range queries (via bisect) demonstrates the importance of algorithmic complexity (O(1), O(log N), etc.) in building scalable systems. This thinking is key when designing APIs, databases, or any latency-sensitive component.
@@ -323,7 +323,7 @@ Designing and implementing a memory-efficient, duplicate-free, and high-throughp
 ### 3. Technical Leadership and Mentoring
 
 - **Code Quality and Best Practices:**  
-  The solution’s structure—clear method responsibilities, in-sync data structures, and careful mutation—models best practices for clean, maintainable code. As a tech lead or mentor, you’ll guide others in writing such code, reviewing PRs, and enforcing standards.
+  The solution’s structure-clear method responsibilities, in-sync data structures, and careful mutation-models best practices for clean, maintainable code. As a tech lead or mentor, you’ll guide others in writing such code, reviewing PRs, and enforcing standards.
 
 - **Explaining Design Decisions:**  
   Discussing why a `set` is used for deduplication or why a `deque` is ideal for FIFO buffering is great practice for technical communication. Leaders must justify architectural choices in design docs, code reviews, and cross-team discussions.
@@ -337,7 +337,7 @@ Designing and implementing a memory-efficient, duplicate-free, and high-throughp
   This type of problem is common in technical interviews, testing data structure mastery, edge case awareness, and O(N) vs O(log N) reasoning. Being fluent in such designs helps you stand out in interviews and explain your thought process with confidence.
 
 - **Whiteboarding & Prototyping:**  
-  The ability to rapidly model a problem, choose the right abstractions, and iterate on solutions is invaluable—whether on a whiteboard, in a design meeting, or while prototyping a new feature.
+  The ability to rapidly model a problem, choose the right abstractions, and iterate on solutions is invaluable-whether on a whiteboard, in a design meeting, or while prototyping a new feature.
 
 ### 5. Real-World Applications and Technical Breadth
 
@@ -345,7 +345,7 @@ Designing and implementing a memory-efficient, duplicate-free, and high-throughp
   Routers, caches, and message brokers all use variations of this pattern. Mastery helps you understand and troubleshoot production issues in tools like Kafka, Redis, or even cloud load balancers.
 
 - **Cross-Language Skills:**  
-  The principles here—efficient FIFO, deduplication, range queries—apply in any language or stack. Mastering them in Python translates to rapid upskilling in Java, Go, or C++ when needed.
+  The principles here-efficient FIFO, deduplication, range queries-apply in any language or stack. Mastering them in Python translates to rapid upskilling in Java, Go, or C++ when needed.
 
 #### In Summary
 

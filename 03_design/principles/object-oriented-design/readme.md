@@ -1,6 +1,6 @@
 # Object-Oriented Design Principles - OOD
 
-The principles mentioned in your question—"Program to an Interface, not to an Implementation," "Hollywood Principle," and "Favor Composition over Inheritance"—are object-oriented design principles that guide developers in creating flexible, maintainable, and reusable software systems. They are complementary to the GRASP principles described in the readme.md file. Here's how they relate:
+The principles mentioned in your question-"Program to an Interface, not to an Implementation," "Hollywood Principle," and "Favor Composition over Inheritance"-are object-oriented design principles that guide developers in creating flexible, maintainable, and reusable software systems. They are complementary to the GRASP principles described in the readme.md file. Here's how they relate:
 
 ## 1. Program to an Interface, not to an Implementation
 

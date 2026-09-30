@@ -100,7 +100,7 @@ Breakdown and deep dive of the provided TaskManager solution, focusing on the co
 - **Avoiding Heap Pollution:**  
   Old/invalid entries are left in the heap but ignored during pop. This avoids the cost of heap rebalancing for every update/removal.
 - **Consistent Interface:**  
-  All operations—add, edit, remove, execute—are supported in O(log n) or O(1).
+  All operations-add, edit, remove, execute-are supported in O(log n) or O(1).
 - **Guarantees on TaskId:**  
   The implementation leverages the guarantee that taskIds are unique and operations are always valid.
 
@@ -134,7 +134,7 @@ Breakdown and deep dive of the provided TaskManager solution, focusing on the co
 | Execute Top    | Heap (pop until valid)    | O(log n) (amortized) |
 
 # Project ideas
-Where the TaskManager system—prioritizing and managing tasks for multiple users—can be implemented
+Where the TaskManager system-prioritizing and managing tasks for multiple users-can be implemented
 
 ### 1. **Bug Bounty Platform**
 - **Description:**  

@@ -365,7 +365,7 @@ Here are some real-world engineering scenarios where the **algorithmic ideas and
 ---
 
 **In short:**  
-The core pattern—maintaining two sorted pools and atomically moving items between them—maps directly to booking, inventory, and order-matching systems. The trade-offs in real-world engineering revolve around concurrency, persistence, distributed consistency, and performance at scale. The algorithmic pattern, however, is foundational and widely used!
+The core pattern-maintaining two sorted pools and atomically moving items between them-maps directly to booking, inventory, and order-matching systems. The trade-offs in real-world engineering revolve around concurrency, persistence, distributed consistency, and performance at scale. The algorithmic pattern, however, is foundational and widely used!
 
 ## Programming Challenge to Career Growth
 
@@ -410,7 +410,7 @@ Mastering this type of algorithm/pattern directly maps to valuable skills for so
 - **Guiding Architectural Decisions:**  
   - You will mentor others on state management, when to use in-memory vs. persistent data, and how to design for concurrent access.
 - **Translating Business Requirements to Code:**  
-  - This exercise is a microcosm of taking requirements from product/business and mapping them into concrete, testable, and maintainable code and APIs—a key leadership responsibility.
+  - This exercise is a microcosm of taking requirements from product/business and mapping them into concrete, testable, and maintainable code and APIs-a key leadership responsibility.
 
 ---
 

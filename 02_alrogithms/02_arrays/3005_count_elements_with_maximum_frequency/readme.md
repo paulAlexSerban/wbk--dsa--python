@@ -77,7 +77,7 @@ class Solution:
 - **Simplicity & Readability:**  
   - The use of `Counter` and list/generator comprehensions makes the code easy to read and maintain.
 - **Efficiency:**  
-  - All operations—counting, finding max, summing—are linear, **O(n)** time complexity.
+  - All operations-counting, finding max, summing-are linear, **O(n)** time complexity.
 - **Pythonic Code:**  
   - Leverages Python’s standard library and idiomatic constructs for conciseness.
 
@@ -157,7 +157,7 @@ This solution is an excellent example of using hashing (dictionaries/Counters) t
   - **Real World:** Needs to be performed in real-time, possibly distributed, and must deal with data races, latency, and incomplete data due to delays in logs.
 
 ### 3. **Distributed Systems: Hotspot Detection**
-- **Scenario:** In distributed systems (e.g., distributed cache or load balancer), you need to find "hot" keys—those accessed with the highest frequency—to optimize caching or balance the load.
+- **Scenario:** In distributed systems (e.g., distributed cache or load balancer), you need to find "hot" keys-those accessed with the highest frequency-to optimize caching or balance the load.
 - **Algorithm Mapping:** 
   - Track access counts per key.
   - Find the max access count.
@@ -187,4 +187,4 @@ This solution is an excellent example of using hashing (dictionaries/Counters) t
 | Latency                    | Negligible                       | May need to optimize for low latency          |
 
 ## Summary
-The algorithmic pattern—count, find max, sum occurrences—is widely used in real-world systems for analytics, monitoring, and optimization. The main differences are scale, performance, and system constraints, which often require distributed, approximate, or real-time adaptations of the basic pattern.
+The algorithmic pattern-count, find max, sum occurrences-is widely used in real-world systems for analytics, monitoring, and optimization. The main differences are scale, performance, and system constraints, which often require distributed, approximate, or real-time adaptations of the basic pattern.

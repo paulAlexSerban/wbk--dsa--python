@@ -54,7 +54,7 @@ Break down and deep-dive into the provided **Spreadsheet** class solution, explo
   Formulas are simple strings like `=X+Y`, split using `split('+')` and checked for integer vs. cell reference.
 
 ### c. **Zero-Default Convention**
-- Unset cells are considered to have a value of 0—this is implemented via `dict.get(key, 0)`.
+- Unset cells are considered to have a value of 0-this is implemented via `dict.get(key, 0)`.
 
 ## 2. **Algorithms**
 
@@ -83,7 +83,7 @@ Break down and deep-dive into the provided **Spreadsheet** class solution, explo
   - `getValue`: Compute a formula.
 
 ### c. **Sparse Storage Optimization**
-- Only store nonzero values, minimizing memory usage—a classic optimization for sparse matrices.
+- Only store nonzero values, minimizing memory usage-a classic optimization for sparse matrices.
 
 ### d. **Graceful Handling of Missing Data**
 - Unset cells default to zero, avoiding KeyError and matching spreadsheet expectations.
